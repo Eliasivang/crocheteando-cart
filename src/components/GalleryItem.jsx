@@ -27,7 +27,7 @@ const [inSearch,setInSearch] = useState(false);
 
 //LOADER
 const [loader,setLoader] = useState(false);
-const [disabledd,setDisabledd] = useState(false);
+
 
 
 const loaderTime = ()=>{
@@ -41,7 +41,7 @@ const loaderTime = ()=>{
 
 const nextPage = () => {
   if(currentPage == lastPage){
-      setDisabledd(true)
+      
       return
   }
   loaderTime();
@@ -66,12 +66,12 @@ const prevPage = () => {
 // Si estoy clickeando en la misma pagina en la que estoy hacemos un early return
 
 const onSpecificPage = (n) => {
- if(currentPage==n){
-    setDisabledd(true)
+  if(n===currentPage){
     return
- }
-  loaderTime();
-  setCurrentPage(n);
+  }
+    loaderTime();
+    setCurrentPage(n);
+  
   
 }
 
@@ -175,7 +175,13 @@ const lastPage = Math.max(...pages)
               {pages == 0 ? "No hay resultados" : <a    href='#amigurumis'><GrFormPrevious  className='mx-3 cursor-pointer disabled' onClick = {prevPage}/></a>}
               <div>
                   {pages.map((page)=>(  
-                  <a href='#amigurumis'><button disabled={disabledd} onClick={()=>onSpecificPage(page)} key={Math.random()} className= { page==currentPage ? 'bg-violet-400  text-white w-8 h-8 mx-1 border-2  hover:text-white text hover:bg-violet-400 border-violet-400' : 'w-8 h-8 bg-white mx-1 border-2  hover:text-white text hover:bg-violet-400 border-violet-400'}>{page}</button></a>
+                  <a 
+                  href='#amigurumis'><button 
+                  onClick={()=>onSpecificPage(page)} 
+                  key={Math.random()} 
+                  className= { page==currentPage ? 'bg-violet-400  text-white w-8 h-8 mx-1 border-2  hover:text-white text hover:bg-violet-400 border-violet-400' : 'w-8 h-8 bg-white mx-1 border-2  hover:text-white text hover:bg-violet-400 border-violet-400'}>
+                      {page}
+                  </button></a>
                   ))}
               </div>
               {pages == 0 ? "" : <a href='#amigurumis'><GrFormNext  className='mx-3 text-black cursor-pointer hover:text-violet-300' onClick={nextPage}/></a> }

@@ -48,8 +48,8 @@ const handleClickImg2 = ()=>{
         <div className='flex items-center justify-center xl:w-[1200px] w-11/12   overflow-hidden h-[300px] md:h-[400px]  rounded-2xl'>
         <BsChevronLeft onClick={prevImg}  className='mx-1 text-4xl font-bold text-black cursor-pointer hover:text-violet-300'/>
                 <div 
-                 className='w-full h-full duration-500 bg-center bg-cover rounded shadow-lg bg-fit' 
-                 style={{backgroundImage: `url(${slides[index].images})`}}>
+                className='w-full h-full duration-500 bg-center bg-cover rounded shadow-lg bg-fit' 
+                style={{backgroundImage: `url(${slides[index].images})`}}>
                 </div>
         <BsChevronRight onClick={nextImg} className='mx-1 text-4xl text-black cursor-pointer hover:text-violet-300'/>                
         </div>
