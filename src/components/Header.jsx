@@ -40,22 +40,43 @@ const openedCart = () => {
 }
   return (
    
-        <header className='sticky top-0 bg-white h-22'>
-          <div className='flex flex-col justify-center w-full md:px-10'>
-            <div className='flex items-center justify-between p-7'>
-                <div className='hidden w-40 sm:block sm:'>
-                        <img src={logo} alt="crocheteandoLogo"/>
+        <header 
+        className='sticky top-0 bg-white h-22 '>
+          <div 
+          className='flex flex-col justify-center w-full md:px-10'>
+            <div 
+            className='flex items-center justify-between p-7'>
+                <div 
+                className='hidden w-40 sm:block sm:'>
+                        <a href="">                     
+                            <img 
+                            src={logo} 
+                            alt="crocheteandoLogo"/>
+                         </a>
                 </div>
                 {/* <div className='block md:hidden '>
                         <BiMenuAltRight onClick={()=> openedMenu()} className='text-white rounded bg-violet-300' size={40}/>
                 </div>   */}
-                <div className='block sm:hidden sm: w-36'>
-                        <a href="home"><img id="home"  src={logo} alt="crocheteandoLogo"/></a>
+                <div 
+                className='block sm:hidden sm: w-36'>
+                        <a 
+                        href="home">
+                          <img  
+                          src={logo} 
+                          alt="crocheteandoLogo"/>
+                          </a>
                 </div>
                 
-                <div className='h-10 rounded '>
-                        <BsHandbagFill onClick={()=>  openedCart()} className = "relative z-50 p-2 text-white rounded bg-violet-300" size={40}/>
-                        <p className='relative z-50 w-6 mr-2 text-center text-white bg-black rounded-full left-5 bottom-4'>{cartLength}</p>
+                <div 
+                className='h-10 rounded '>
+                        <BsHandbagFill 
+                        onClick={()=>  openedCart()} 
+                        className = "relative z-50 p-2 text-white rounded bg-violet-300" 
+                        size={40}/>
+                        <p 
+                        className='relative z-50 w-6 mr-2 text-center text-white bg-black rounded-full left-5 bottom-4'>
+                            {cartLength}
+                        </p>
                 </div>     
             </div>
            
