@@ -44,24 +44,20 @@ const handleClickImg2 = ()=>{
 
 
   return (
-    <>
-        <div className='flex items-center justify-center w-3/4 mx-auto overflow-hidden h-80 md:h-96 rounded-2xl'>
+    <section className='flex flex-col items-center justify-center w-full my-16'>
+        <div className='flex items-center justify-center xl:w-[1200px] w-11/12   overflow-hidden h-[300px] md:h-[400px]  rounded-2xl'>
+        <BsChevronLeft onClick={prevImg}  className='mx-1 text-4xl font-bold text-black cursor-pointer hover:text-violet-300'/>
                 <div 
-                 className='w-full h-full duration-500 bg-cover ' 
+                 className='w-full h-full duration-500 bg-center bg-cover rounded shadow-lg bg-fit' 
                  style={{backgroundImage: `url(${slides[index].images})`}}>
                 </div>
-                <div>
-                    <BsChevronLeft onClick={prevImg}  className='absolute left-0 mx-1 text-4xl text-black cursor-pointer hover:text-violet-300 '/>
-                    <BsChevronRight onClick={nextImg} className='absolute right-0 mx-1 text-4xl text-black cursor-pointer hover:text-violet-300 '/>
-                </div> 
+        <BsChevronRight onClick={nextImg} className='mx-1 text-4xl text-black cursor-pointer hover:text-violet-300'/>                
         </div>
-
-
         <div className='flex items-end justify-center w-full my-4'>
             <button onClick= {handleClickImg1}><TbPointFilled size = {30} className = {index === 0 ? "text-violet-300 transition-all duration-200" : "text-gray-400 transition-all duration-200"}/></button>
             <button onClick= {handleClickImg2}><TbPointFilled size = {30} className = {index === 1 ? "text-violet-300 transition-all duration-200" : "text-gray-400 transition-all duration-200"}/></button>
         </div>  
-    </>
+    </section>
 )}
 
 export default Slider 

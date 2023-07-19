@@ -1,10 +1,10 @@
-import React from 'react'
-import logo from '../assets/cr.png'
-
+import React from 'react';
+import {BsGithub} from 'react-icons/bs';
+ 
 function Footer() {
   return (
-    <div className='flex flex-col items-center justify-center h-20 my-3'>
-        <p className='text-center'>Hecho por Elias Gonzalez.</p>
+    <div className='flex items-center justify-center bg-gray-50 h-36 '>
+        <p className='text-center'>Hecho por <a href='https://github.com/Eliasivang' className='p-1 transform cursor-pointer hover:bg-violet-300'>Elias Gonzalez</a></p><BsGithub className='mx-2 text-xl text-violet-300'/>
     </div>
   )
 }

@@ -4,7 +4,6 @@ import Footer from './components/Footer';
 import {CartProvider} from './context/CartContext';
 import './App.css'
 import Featured from './components/Featured';
-import NotificationCart from './components/NotificationCart';
 
 
 function App() {

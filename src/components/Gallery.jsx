@@ -4,10 +4,8 @@ import GalleryItem from './GalleryItem';
 function Gallery() {
   return (
     <>
-      <h2 className='p-3 mb-3 text-xl text-center bg-violet-300'>AMIGURUMIS</h2>
-      <div className='container p-6 m-auto'>
-          <GalleryItem/>
-      </div>
+        <h2 id='amigurumis' className='p-3 mb-3 text-lg text-center shadow-sm bg-gray-50 md:text-2xl'>AMIGURUMIS</h2>
+        <GalleryItem/>    
     </>
   )
 }

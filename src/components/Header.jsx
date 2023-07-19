@@ -1,61 +1,82 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import logo from "../assets/cr.png"
-import { BiMenuAltRight } from 'react-icons/bi';
+import { AnimatePresence, motion } from 'framer-motion';
 import { BsHandbagFill} from 'react-icons/bs';
-import NavList from './NavList';
+// import NavList from './NavList';
 import Cart from "../components/Cart";
 import { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
-import Search from './Search';
 
 function Header() {
-const {cartItem, setCartItem} = useContext(CartContext);
+const {cartItem,setCartItem} = useContext(CartContext);
 const [open, setOpen] = useState(false);
 const [openCart, setOpenCart] = useState(false);
-const cartLength = cartItem.reduce((acc, item) => acc + item.quantity, 0);devicePixelRatio
+const cartLength = cartItem.reduce((acc, item) => acc + item.quantity, 0);
 
-const openedMenu = () => {
-  if(open){
-    setOpen(false)
-    setOpenCart(false)
-  }else {
-    setOpen(true)
-    setOpenCart(false)
-  }
-}
+
+
+
+// const openedMenu = () => {
+//   if(open){
+//     setOpen(false)
+//     setOpenCart(false)
+    
+//   }else {
+//     setOpen(true)
+//     setOpenCart(false)
+//   }
+// }
+
 const openedCart = () => {
   if(openCart){
     setOpenCart(false)
     setOpen(false)
+
   }else {
     setOpenCart(true)
     setOpen(false)
+    
   }
 }
   return (
-    <>
-        <header>
-            <div className='z-50 flex justify-between w-full p-7'>
-            <div className='hidden w-40 sm:block sm:'>
+   
+        <header className='sticky top-0 bg-white h-22'>
+          <div className='flex flex-col justify-center w-full md:px-10'>
+            <div className='flex items-center justify-between p-7'>
+                <div className='hidden w-40 sm:block sm:'>
                         <img src={logo} alt="crocheteandoLogo"/>
                 </div>
-                <div className='block md:hidden '>
+                {/* <div className='block md:hidden '>
                         <BiMenuAltRight onClick={()=> openedMenu()} className='text-white rounded bg-violet-300' size={40}/>
-                </div>  
+                </div>   */}
                 <div className='block sm:hidden sm: w-36'>
-                        <img src={logo} alt="crocheteandoLogo"/>
+                        <a href="home"><img id="home"  src={logo} alt="crocheteandoLogo"/></a>
                 </div>
-  
-                <div className='rounded'>
-                        <BsHandbagFill onClick={()=>  openedCart()} className = "p-2 text-white rounded bg-violet-300" size={40}/>
-                        <p className='relative w-6 mr-2 text-center text-white bg-black rounded-full left-5 bottom-4'>{cartLength}</p>
-                </div>    
+                
+                <div className='h-10 rounded '>
+                        <BsHandbagFill onClick={()=>  openedCart()} className = "relative z-50 p-2 text-white rounded bg-violet-300" size={40}/>
+                        <p className='relative z-50 w-6 mr-2 text-center text-white bg-black rounded-full left-5 bottom-4'>{cartLength}</p>
+                </div>     
             </div>
            
-            {open && <NavList/>} 
-            {openCart && <Cart/>}
+          </div>
+          <AnimatePresence>
+            {openCart && (           
+                <motion.div 
+                key="modal"
+                initial={{ opacity: 0, y:-50 }}
+                animate={{ opacity: 1, y:0 }}
+                exit={{ opacity: 0, y:-30 }}> 
+                    <Cart/>
+                </motion.div>
+                
+            )}
+            </AnimatePresence>    
+    
+            {/* {open && <NavList/>}  */}
+            
         </header>
-    </>
+   
   )
 }
 
