@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import {items,grogu} from '../data/Products';
 import { CartContext } from '../context/CartContext';
+import { AnimatePresence, motion } from 'framer-motion';
 import NotificationCart from './NotificationCart';
 import {AiOutlineSearch} from 'react-icons/ai';
 import {GrFormNext,GrFormPrevious} from 'react-icons/gr';
@@ -60,7 +61,7 @@ const prevPage = () => {
   if(currentPage > 1){
       setCurrentPage(currentPage - 1);
   }
- 
+
 }
 
 // Si estoy clickeando en la misma pagina en la que estoy hacemos un early return
@@ -90,11 +91,11 @@ if(inSearch){
 
 
 function addToCart(amigurumis){
-  setTimeout(() => {
-    setNotification(false)
-  }, 2000);
   setNotification(true)
-  
+  setTimeout(() => {
+      setNotification(false)
+  }, 2000);
+ 
   if(cartItem.find(item => item.id === amigurumis.id)){
     
     const newCart = cartItem.map(item => item.id === amigurumis.id 
@@ -186,7 +187,19 @@ const lastPage = Math.max(...pages)
               </div>
               {pages == 0 ? "" : <a href='#amigurumis'><GrFormNext  className='mx-3 text-black cursor-pointer hover:text-violet-300' onClick={nextPage}/></a> }
         </div>
-        {notification === true && <NotificationCart/>}
+        <AnimatePresence>
+            {notification &&(
+              <motion.div
+              className='fixed bottom-0 right-0' 
+              key="notification"
+              initial={{ opacity: 0, x:200 }}
+              animate={{ opacity: 1, x:0 }}
+              exit={{ opacity: 0, x:300 }}> 
+                      <NotificationCart/>
+              </motion.div>        
+            )}
+            
+        </AnimatePresence>
     </section> 
     )   
 }

@@ -5,7 +5,7 @@ import {AiOutlineDelete} from 'react-icons/ai'
 
 
 function Cart() {
-const {cartItem,setCartItem, total,setTotal} = useContext(CartContext);
+const {cartItem,setCartItem, total,setTotal,cartLS} = useContext(CartContext);
 
 
  
@@ -35,8 +35,8 @@ const {cartItem,setCartItem, total,setTotal} = useContext(CartContext);
         ))}
       </ul>
     
-      {total!=0 && <p className='p-3 font-medium '><b>Total:</b> ${total}</p>}
-      {total==0 && <p className='p-3 text-center text-black '>No hay productos en el carrito</p>}
+      {total !== 0 && <p className='p-3 font-medium '><b>Total:</b> ${total}</p>}
+      {total===0 && <p className='p-3 text-center text-black '>No hay productos en el carrito</p>}
       <button onClick={()=> deleteItems()} className='w-full h-10 font-semibold bg-violet-300 hover:bg-violet-400'>Vaciar carrito</button>
       </div>
     
