@@ -38,10 +38,9 @@ const openedCart = () => {
     
   }
 }
-  return (
-   
+  return ( 
         <header 
-        className='sticky top-0 bg-white h-22 '>
+        className='sticky top-0 z-50 bg-white h-22 '>
           <div 
           className='flex flex-col justify-center w-full md:px-10'>
             <div 
@@ -52,7 +51,7 @@ const openedCart = () => {
                             <img 
                             src={logo} 
                             alt="crocheteandoLogo"/>
-                         </a>
+                        </a>
                 </div>
                 {/* <div className='block md:hidden '>
                         <BiMenuAltRight onClick={()=> openedMenu()} className='text-white rounded bg-violet-300' size={40}/>
@@ -68,7 +67,7 @@ const openedCart = () => {
                 </div>
                 
                 <div 
-                className='h-10 rounded '>
+                className='h-10 rounded cursor-pointer '>
                         <BsHandbagFill 
                         onClick={()=>  openedCart()} 
                         className = "relative z-50 p-2 text-white rounded bg-violet-300" 
@@ -79,7 +78,7 @@ const openedCart = () => {
                         </p>
                 </div>     
             </div>
-           
+      
           </div>
           <AnimatePresence>
             {openCart && (           

@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import {items,grogu} from '../data/Products';
+import {items} from '../data/Products';
 import { CartContext } from '../context/CartContext';
 import { AnimatePresence, motion } from 'framer-motion';
 import NotificationCart from './NotificationCart';
@@ -102,18 +102,20 @@ function addToCart(amigurumis){
                     ? {...item, quantity: item.quantity + 1 } 
                     : item);
                     setTotal(total + amigurumis.price *amigurumis.quantity);                 
-    setCartItem(newCart)
+                    setCartItem(newCart)
   }else
   setCartItem([...cartItem, amigurumis]); 
   setTotal(total + amigurumis.price *amigurumis.quantity);
 }
 
 
-const handleChange = (e)=>{
-  setSearch(e.target.value);
+const handleChange = (event)=>{
+  setSearch(event.target.value);
+  console.log(search)
 }
 
-const handleSubmit = ()=>{
+const handleSubmit = (event)=>{
+  event.preventDefault()
   const filteredItems = items.filter((item)=> item.tittle.toLowerCase().includes(search.toLowerCase()));
   setInSearch(true);
   setSearchItems(filteredItems);
@@ -123,12 +125,24 @@ const handleSubmit = ()=>{
 //Buscamos el numero de pagina con el mayor valor, y por ende la que ultima.
 const lastPage = Math.max(...pages)
 
+const handleReset =()=>{
+  setInSearch(false)
+  setSearch("")
+}
+
   return (
   
     <section className='grid justify-center w-full px-4'>     
-          <form onSubmit={handleSubmit} className='flex items-center justify-start'>
-              <input onChange={handleChange} type="text" maxLength={20} className = 'w-64 p-2 my-6 border rounded h-11' placeholder='Busca un Amigurumi' />
-              <AiOutlineSearch className='absolute block ml-[230px] cursor-pointer'/>
+          <form onSubmit={handleSubmit} className='relative flex items-center justify-start gap-2 '>
+              <input onChange={handleChange} value={search} type="text" maxLength={20} className = 'w-48 p-4 pl-8 my-6 border rounded lg:w-64 h-11' placeholder='Busca un Amigurumi...' />
+              <button className='absolute left-2' type='submit'>
+                  <AiOutlineSearch  size={20} className='cursor-pointer '/>
+              </button>
+              
+             {inSearch && <button className='p-2 text-sm lg:text-md h-11 bg-violet-300 hover:bg-violet-400 hover:text-white' onClick={handleReset}>Limpiar Busqueda</button>}
+            
+            
+                
           </form>
               { loader 
               ? <div className='flex items-center justify-center my-80'>
@@ -145,11 +159,11 @@ const lastPage = Math.max(...pages)
                   {currentProducts.map(amigurumis=>(
                   <li key={amigurumis.id} className='flex flex-col items-center justify-center gap-3 pt-3 shadow-lg '>
                       <div className='w-full border-b-2'>
-                          <img  className='w-full' src= {grogu} alt="logo"/>
+                          <img  className='w-full' src= {amigurumis.image} alt="logo"/>
                       </div>
                       <p className='font-bold'>{amigurumis.tittle}</p>
                       <p className='w-12 text-center rounded-2xl'>${amigurumis.price}</p>
-                      <button  onClick = {()=> addToCart(amigurumis)}className='w-full p-2 hover:bg-violet-400 hover:text-white bg-violet-300 '>Añadir al carro</button>
+                      <button  onClick = {()=> addToCart(amigurumis)}className='w-full p-2 font-bold hover:bg-violet-400 hover:text-white bg-violet-300'>Añadir al carro</button>
                   </li>
                   ))}
               </ul>
@@ -157,11 +171,11 @@ const lastPage = Math.max(...pages)
         //Articulos buscados
           :
           <div className='xl:w-[1200px] w-full grid'>      
-              <ul className={loader ? "hidden ": 'items-center grid w-full sm:grid-cols-2 grid-cols-1 md:grid-cols-3 justify-center gap-4'}>
+                  <ul className={loader ? "hidden ": 'items-center grid w-full sm:grid-cols-2 grid-cols-1 md:grid-cols-3 justify-center gap-4'}>
                   {searchedProducts.map(amigurumis=>(
                   <li key={amigurumis.id} className='flex flex-col items-center justify-center gap-3 pt-3 shadow-lg '>
                   <div className='w-full border-b-2'>
-                      <img  className='w-full' src= {grogu} alt="logo"/>
+                      <img  className='w-full' src= {amigurumis.image} alt="logo"/>
                   </div>
                   <p className='font-bold'>{amigurumis.tittle}</p>
                   <p className='w-12 text-center rounded-2xl'>${amigurumis.price}</p>
@@ -177,12 +191,13 @@ const lastPage = Math.max(...pages)
               <div>
                   {pages.map((page)=>(  
                   <a 
+                  key={Math.random()} 
                   href='#amigurumis'><button 
                   onClick={()=>onSpecificPage(page)} 
-                  key={Math.random()} 
                   className= { page==currentPage ? 'bg-violet-400  text-white w-8 h-8 mx-1 border-2  hover:text-white text hover:bg-violet-400 border-violet-400' : 'w-8 h-8 bg-white mx-1 border-2  hover:text-white text hover:bg-violet-400 border-violet-400'}>
                       {page}
-                  </button></a>
+                  </button>
+                  </a>
                   ))}
               </div>
               {pages == 0 ? "" : <a href='#amigurumis'><GrFormNext  className='mx-3 text-black cursor-pointer hover:text-violet-300' onClick={nextPage}/></a> }
