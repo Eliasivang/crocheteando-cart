@@ -111,20 +111,20 @@ function addToCart(amigurumis){
 
 const handleChange = (event)=>{
   setSearch(event.target.value);
-  console.log(search)
 }
 
 const handleSubmit = (event)=>{
-  event.preventDefault()
-  const filteredItems = items.filter((item)=> item.tittle.toLowerCase().includes(search.toLowerCase()));
-  setInSearch(true);
-  setSearchItems(filteredItems);
-  setCurrentPage(1);
- 
+    event.preventDefault()
+    const filteredItems = items.filter((item)=> item.tittle.toLowerCase().includes(search.toLowerCase()));
+    if(!inSearch && search !==""){
+      setInSearch(true)
+    } 
+    setSearchItems(filteredItems);
+    setCurrentPage(1);
 }
 //Buscamos el numero de pagina con el mayor valor, y por ende la que ultima.
 const lastPage = Math.max(...pages)
-
+console.log(inSearch)
 const handleReset =()=>{
   setInSearch(false)
   setSearch("")
@@ -132,14 +132,14 @@ const handleReset =()=>{
 
   return (
   
-    <section className='grid justify-center w-full px-4'>     
+    <section className='grid justify-center w-full px-2'>     
           <form onSubmit={handleSubmit} className='relative flex items-center justify-start gap-2 '>
               <input onChange={handleChange} value={search} type="text" maxLength={20} className = 'w-48 p-4 pl-8 my-6 border rounded lg:w-64 h-11' placeholder='Busca un Amigurumi...' />
               <button className='absolute left-2' type='submit'>
                   <AiOutlineSearch  size={20} className='cursor-pointer '/>
               </button>
               
-             {inSearch && <button className='p-2 text-sm lg:text-md h-11 bg-violet-300 hover:bg-violet-400 hover:text-white' onClick={handleReset}>Limpiar Busqueda</button>}
+             {inSearch && <button className='p-1 text-sm lg:text-md h-11 bg-violet-300 hover:bg-violet-400 hover:text-white' onClick={handleReset}>Limpiar Busqueda</button>}
             
             
                 
